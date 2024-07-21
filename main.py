@@ -66,6 +66,11 @@ async def handle_new_message(event):
         tasks = [button.click() for row in event.buttons for button in row]
         await asyncio.gather(*tasks)
 
+@client.on(events.NewMessage)
+async def handler(event):
+    # Print received message
+    print(f"Message from {event.sender_id}: {event.raw_text}")
+
 @client.on(events.NewMessage(pattern='/ping'))
 async def ping(event):
     start_time = datetime.now()
